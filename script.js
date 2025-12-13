@@ -41,7 +41,7 @@ const exec = e => {
 
     (() => {
         try{
-            write(new Function(`return ${cmd}`)(), "gray");
+            write(new Function(`return {"js": ${cmd.replaceAll("`", "\\`")}}["js"]()`)(), "gray");
         } catch(E){
             console.error(`Uncaught ${E}`);
         }
@@ -58,3 +58,4 @@ input.addEventListener("keydown", exec);
 if(URLParam){
     exec({"key": "Enter"});
 }
+
